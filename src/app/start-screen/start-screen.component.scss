@@ -20,7 +20,15 @@
 
 .startscreen-frame {
     color: white;
-    background-image: linear-gradient(132deg, #2c2a2a 0%, #5c5858 100%);
+    background-image: linear-gradient(132deg, #161616 0%, #333030 100%);
     border: .7rem solid transparent;
     border-image: url('../../assets/img/bg.jpg') 2.333% round;
+    min-height: 24rem;
+    min-width: 12rem;
+    gap: 1rem;
+}
+
+.btn-primary {
+    --bs-btn-bg: #a6183b;
+    --bs-btn-border-color: #a6183b;
 }
