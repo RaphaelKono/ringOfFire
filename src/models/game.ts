@@ -12,7 +12,6 @@ export class Game {
             this.stack.push('hearts_'+i);
         }
         this.shuffle();
-
     }
 
     shuffle() {

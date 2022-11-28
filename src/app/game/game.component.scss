@@ -43,3 +43,19 @@
         transform: scale(1.2) translateX(-5.75rem) translateY(-5.75rem) rotate(15deg);
     }
 }
+
+.played-card {
+    transform: scale(1.2) translateX(-5.75rem) translateY(-5.75rem) rotate(15deg);
+}
+
+.player-container-pos {
+    position: absolute;
+    right: 0;
+    backdrop-filter: blur(2px);
+}
+
+.btn-add {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+}
