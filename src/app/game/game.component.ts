@@ -19,13 +19,13 @@ export class GameComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
-
-    dialogRef.afterClosed().subscribe((name: string) => {
-      console.log('The dialog was closed', name);
-      this.game.players.push(name);
-    });
+    dialogRef.afterClosed().subscribe((name: string) => this.validateNewPlayer(name));
   }
 
+  validateNewPlayer(name: string){
+    if (name && name.length > 0)
+      this.game.players.push(name);
+  }
 
   ngOnInit(): void {
     this.newGame();
@@ -33,7 +33,6 @@ export class GameComponent implements OnInit {
 
   newGame() {
     this.game = new Game();
-    console.log(this.game);
   }
 
   pickCard() {
@@ -44,11 +43,18 @@ export class GameComponent implements OnInit {
   updateCards(){
     this.currentCard = this.game.stack.pop();
     this.pickCardAnimation = true;
+    if (this.game.players.length > 0)
+      this.changeCurrentPlayer();
     setTimeout(() => this.setPickedCard(), 1500);
   }
 
   setPickedCard(){
     this.game.playedCards.push(this.currentCard);
     this.pickCardAnimation = false
+  }
+
+  changeCurrentPlayer(){
+    this.game.currentPlayer++;
+    this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
   }
 }
