@@ -7,10 +7,19 @@
 
 <div class="game-screen d-flex align-items-center justify-content-center">
     <div class="card-stack">
-        <img *ngFor="let c of game.stack; let i = index;" [ngStyle]="{'right.px': i*.25}" src="assets/img/cards/card_cover.png">
-        <img (click)="pickCard()" class="top-card" src="assets/img/cards/card_cover.png" style="right: 20px">
+        <!-- <img *ngFor="let c of game.stack; let i = index;" [ngStyle]="{'right.px': i*0, 'top.px':i*0, 'transform': 'rotate('+i*(360/game.stack.length)+'deg)', '-webkit-transform': 'rotate('+i*(360/game.stack.length)+'deg)', '-ms-transform': 'rotate('+i*(360/game.stack.length)+'deg)'}"
+            src="assets/img/cards/card_cover.png">
+        <img (click)="pickCard()" class="top-card" src="assets/img/cards/card_cover.png" style="right: 10px">
         <img *ngFor="let card of game.playedCards;" class="played-card" src="assets/img/cards/{{ card }}.png" style="right: 20px">
-        <img (click)="pickCard()" *ngIf="pickCardAnimation" class="pick-card" src="assets/img/cards/{{ currentCard }}.png" style="right: 20px">
+        <img (click)="pickCard()" *ngIf="pickCardAnimation" class="pick-card" src="assets/img/cards/{{ currentCard }}.png" style="right: 20px"> -->
+    </div>
+
+    <div class="container">
+        <div class="tarot-deck">
+            <ul class="tarot-spread">
+                <li *ngFor="let c of game.stack; let i = index;" [ngStyle]="{'z-index': 1000+1, 'transform': 'rotate('+i*(360/game.stack.length)+'deg)'}"><img [ngStyle]="{'z-index': 1000+i}" src="assets/img/cards/card_cover.png"><img [ngStyle]="{'z-index': 2000+i}" class="card-oracle-image-hidden" src="assets/img/cards/card_cover.png"></li>
+            </ul>
+        </div>
     </div>
 </div>
 

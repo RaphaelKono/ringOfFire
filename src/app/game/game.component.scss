@@ -80,3 +80,76 @@
     bottom: 1rem;
     left: 1rem;
 }
+
+// 
+.tarot-deck {
+    /* Height based on window dimensions */
+    height: calc(var(--scale) * 8.5);
+    margin: calc(var(--scale) * 0.3) auto;
+}
+
+ul.tarot-spread {
+    /* Setting the required proportions to the cards */
+    width: calc(var(--scale) * 1);
+    height: calc(var(--scale) * 1.7);
+    margin: 0 auto;
+    position: relative;
+    padding: 0;
+    list-style-type: none;
+}
+
+
+/* Media queries to ensure that the circle always fits the screen */
+
+@media (orientation: landscape) {
+    .tarot-deck {
+        --scale: 11vh;
+    }
+}
+
+@media (orientation: portrait) {
+    .tarot-deck {
+        --scale: 11vw;
+    }
+}
+
+.tarot-deck ul.tarot-spread li {
+    border-radius: 5px;
+    padding: 0;
+    border: 1px solid #b3cde0;
+}
+
+ul.tarot-spread li {
+    /* Here we duplicate the size of the parent block */
+    width: inherit;
+    height: inherit;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #fff;
+    pointer-events: auto;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform-origin: 50% 235% 0px;
+    transform-origin: 50% 235% 0px;
+    transition: transform 20000ms ease-in 0ms;
+}
+
+.tarot-deck li img {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.tarot-deck li img:hover {
+    opacity: 0.75;
+}
+
+.tarot-deck li img.card-oracle-image-hidden {
+    display: none;
+}
