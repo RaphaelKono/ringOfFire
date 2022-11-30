@@ -1,16 +1,16 @@
 <mat-card class="example-card">
     <mat-card-header>
-        <mat-card-subtitle>{{ card ? subtitle : 'No card picked yet'}}</mat-card-subtitle>
-        <mat-card-title>{{ card ? title : 'Please pick a card' }}</mat-card-title>
+        <mat-card-subtitle class="font-Rye">{{ card ? subtitle : 'No card picked yet'}}</mat-card-subtitle>
+        <mat-card-title class="font-Rye">{{ card ? title : 'Please pick a card' }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <p>{{ card ? longText : 'Please click on the top card of the card stack.' }}</p>
-        <mat-divider></mat-divider>
+        <p class="font-Rye txt-margin">{{ card ? longText : 'Please click on the top card of the card stack.' }}</p>
+        <!-- <mat-divider></mat-divider> -->
     </mat-card-content>
-    <mat-card-actions>
+    <!-- <mat-card-actions>
         <button mat-button>LIKE</button>
         <button mat-button>SHARE</button>
-    </mat-card-actions>
+    </mat-card-actions> -->
     <mat-card-footer>
         <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     </mat-card-footer>

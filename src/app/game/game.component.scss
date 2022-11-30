@@ -25,22 +25,22 @@
     img {
         position: absolute;
         display: block;
-        width: 5.75rem;
+        width: 10rem;
     }
 }
 
 .top-card {
     transition: all 125ms ease-in-out;
     &:hover {
-        filter: brightness(1.2);
+        filter: brightness(0.7);
         cursor: pointer;
-        transform: scale(1.02) translateY(-10px);
+        transform: scale(1.02) translateX(-.2rem) translateY(-1rem);
     }
 }
 
 .pick-card {
     animation: pick-card-animation 1.25s ease-in-out;
-    transform: scale(1.2) translateX(-5.75rem) translateY(-5.75rem) rotate(15deg);
+    transform: translateX(-10rem) translateY(-10rem) rotate(15deg);
 }
 
 @keyframes pick-card-animation {
@@ -54,12 +54,12 @@
         transform: scale(1.5);
     }
     100% {
-        transform: scale(1.2) translateX(-5.75rem) translateY(-5.75rem) rotate(15deg);
+        transform: scale(1) translateX(-10rem) translateY(-10rem) rotate(15deg);
     }
 }
 
 .played-card {
-    transform: scale(1.2) translateX(-5.75rem) translateY(-5.75rem) rotate(15deg);
+    transform: scale(1) translateX(-10rem) translateY(-10rem) rotate(15deg);
 }
 
 .player-container-pos {
@@ -72,6 +72,7 @@
     position: absolute;
     right: 1rem;
     bottom: 1rem;
+    font-size: 2rem;
 }
 
 .pin-bottom {

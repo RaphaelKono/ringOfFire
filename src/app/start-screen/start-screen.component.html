@@ -2,8 +2,18 @@
     <img class="startscreen-img" src="assets/img/startscreen.jpg">
 </div>
 <div class="startscreen-container startscreen-overlay">
-    <div class="startscreen-frame">
-        <img src="assets/img/bottle.png">
-        <button mat-button color="primary" (click)="newGame()" class="start-btn">Start Game</button>
-    </div>
+    <mat-card class="example-card startscreen-frame">
+        <mat-card-header>
+            <mat-card-title class="txt-center font-Rye fadeIn">
+                Ring of Fire
+            </mat-card-title>
+            <mat-card-subtitle class="txt-center font-Rye fadeIn">
+                Drinking game with playing cards
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+            <button mat-button color="primary" (click)="newGame()" class="start-btn fadeIn">Start Game</button>
+        </mat-card-content>
+    </mat-card>
 </div>
