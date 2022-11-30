@@ -17,6 +17,24 @@
     }
 }
 
+.shortname {
+    display: none;
+}
+
 .player-active {
     background-color: rgba(161, 21, 77, 0.5);
+}
+
+@media(max-width:1200px) {
+    .player-container {
+        gap: .5rem;
+        width: 5rem;
+        padding: 0 .5rem 0 0;
+    }
+    .shortname {
+        display: unset;
+    }
+    .fullname {
+        display: none;
+    }
 }

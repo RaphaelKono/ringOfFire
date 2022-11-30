@@ -1,7 +1,13 @@
 .example-card {
-    max-width: 400px;
+    width: 400px;
 }
 
 .txt-margin {
     margin-bottom: 1rem !important;
+}
+
+@media(max-width: 479px) {
+    .example-card {
+        width: 100vw;
+    }
 }

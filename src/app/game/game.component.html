@@ -5,31 +5,20 @@
 <app-player *ngFor="let player of game.players; let i = index" [ngStyle]="{'top.rem': 4 + (2.5*i)}" [name]="player" [playerActive]="i === game.currentPlayer" class="player-container-pos"></app-player>
 <!-- From the Object game of the exported Class Game (-> models/game.ts) we put the current position in game.players-Array (= Player) as an Input into PlayerComponent (see player.component.ts: @Input() name: string). Same for the playerActive-Boolean (@Input() playerActive: boolean) -->
 
-<div class="game-screen d-flex align-items-center justify-content-center">
+<div class="game-screen d-flex flex-column justify-content-between align-items-center">
+    <div></div>
     <div class="card-stack">
-        <!-- <img *ngFor="let c of game.stack; let i = index;" [ngStyle]="{'right.px': i*0, 'top.px':i*0, 'transform': 'rotate('+i*(360/game.stack.length)+'deg)', '-webkit-transform': 'rotate('+i*(360/game.stack.length)+'deg)', '-ms-transform': 'rotate('+i*(360/game.stack.length)+'deg)'}"
-            src="assets/img/cards/card_cover.png">
-        <img (click)="pickCard()" class="top-card" src="assets/img/cards/card_cover.png" style="right: 10px">
-        <img *ngFor="let card of game.playedCards;" class="played-card" src="assets/img/cards/{{ card }}.png" style="right: 20px">
-        <img (click)="pickCard()" *ngIf="pickCardAnimation" class="pick-card" src="assets/img/cards/{{ currentCard }}.png" style="right: 20px"> -->
+        <img [class.hidden]="c == ''" *ngFor="let c of game.stack; let i = index;" [ngStyle]="{'right.px': i*0, 'top.px':i*0, 'transform': 'rotate('+i*(360/game.stack.length)+'deg)', '-webkit-transform': 'rotate('+i*(360/game.stack.length)+'deg)', '-ms-transform': 'rotate('+i*(360/game.stack.length)+'deg)'}"
+            (click)="pickCard(i)" class="card-from-stack top-card" src="assets/img/cards/card_cover.png">
+        <img *ngFor="let card of game.playedCards;" class="played-card" src="assets/img/cards/{{ card }}.png">
+        <img *ngIf="pickCardAnimation" class="pick-card" src="assets/img/cards/{{ currentCard }}.png">
     </div>
 
-    <div class="container">
-        <div class="tarot-deck">
-            <ul class="tarot-spread">
-                <li *ngFor="let c of game.stack; let i = index;" [ngStyle]="{'z-index': 1000+1, 'transform': 'rotate('+i*(360/game.stack.length)+'deg)'}"><img [ngStyle]="{'z-index': 1000+i}" src="assets/img/cards/card_cover.png"><img [ngStyle]="{'z-index': 2000+i}" class="card-oracle-image-hidden" src="assets/img/cards/card_cover.png"></li>
-            </ul>
-        </div>
+    <div class="d-flex justify-content-between pin-bottom align-items-center">
+        <app-game-info [card]="currentCard"></app-game-info>
+        <button mat-fab color="primary" (click)="openDialog()" class="btn-add">+</button>
     </div>
 </div>
 
-<app-game-info [card]="currentCard" class="pin-bottom"></app-game-info>
-
-
-<button mat-fab color="primary" (click)="openDialog()" class="btn-add">
-    +
-</button>
 
 <!-- <a href="https://www.flaticon.com/free-icons/beard" title="beard icons">Beard icons created by Freepik - Flaticon</a> -->
-
-<!-- ngStyle für meinen Rotation: 'transform': 'rotate('+$(2deg*i)+'deg)' -->

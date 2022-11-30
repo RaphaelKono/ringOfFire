@@ -12,12 +12,24 @@ body {
     display: flex;
 }
 
+.flex-column {
+    flex-direction: column;
+}
+
 .justify-content-center {
     justify-content: center;
 }
 
+.justify-content-between {
+    justify-content: space-between;
+}
+
 .align-items-center {
     align-items: center;
+}
+
+.align-items-between {
+    align-items: space-between;
 }
 
 .txt-center {

@@ -35,13 +35,14 @@ export class GameComponent implements OnInit {
     this.game = new Game();
   }
 
-  pickCard() {
+  pickCard(index: number) {
     if (!this.pickCardAnimation)
-      this.updateCards();
+      this.updateCards(index);
   }
 
-  updateCards(){
-    this.currentCard = this.game.stack.pop();
+  updateCards(index: number){
+    this.currentCard = this.game.stack[index];
+    this.game.stack[index] = "";
     this.pickCardAnimation = true;
     if (this.game.players.length > 0)
       this.changeCurrentPlayer();

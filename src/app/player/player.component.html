@@ -1,4 +1,5 @@
 <div class="player-container d-flex align-items-center" [class.player-active]="playerActive">
     <img src="assets/img/avatar.png">
-    <span>{{name}}</span>
+    <span class="fullname">{{name}}</span>
+    <span class="shortname">{{name.charAt(0)}}</span>
 </div>

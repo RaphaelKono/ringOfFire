@@ -1,8 +1,5 @@
 .game-screen {
-    height: 100vh;
-    width: 100vw;
-    max-width: 100%;
-    overflow: hidden;
+    min-height: 100vh;
 }
 
 .game-screen-background {
@@ -22,25 +19,30 @@
 
 .card-stack {
     position: relative;
+    margin-top: -20%;
+    width: calc(var(--scale) * 1);
+    height: calc(var(--scale) * 1.7);
     img {
         position: absolute;
         display: block;
-        width: 10rem;
+        width: 100%;
+        height: 100%;
+        -webkit-transform-origin: 50% 235% 0;
+        transform-origin: 50% 170% 0;
     }
 }
 
-.top-card {
-    transition: all 125ms ease-in-out;
+.card-from-stack {
     &:hover {
         filter: brightness(0.7);
+        transform-origin: 50% 155% 0;
         cursor: pointer;
-        transform: scale(1.02) translateX(-.2rem) translateY(-1rem);
     }
 }
 
 .pick-card {
     animation: pick-card-animation 1.25s ease-in-out;
-    transform: translateX(-10rem) translateY(-10rem) rotate(15deg);
+    transform: scale(1) translateX(-50%) translateY(110%) rotate(15deg);
 }
 
 @keyframes pick-card-animation {
@@ -54,12 +56,12 @@
         transform: scale(1.5);
     }
     100% {
-        transform: scale(1) translateX(-10rem) translateY(-10rem) rotate(15deg);
+        transform: scale(1) translateX(-50%) translateY(110%) rotate(15deg);
     }
 }
 
 .played-card {
-    transform: scale(1) translateX(-10rem) translateY(-10rem) rotate(15deg);
+    transform: scale(1) translateX(-50%) translateY(110%) rotate(15deg);
 }
 
 .player-container-pos {
@@ -69,87 +71,64 @@
 }
 
 .btn-add {
-    position: absolute;
-    right: 1rem;
-    bottom: 1rem;
     font-size: 2rem;
+    margin-right: 1rem;
 }
 
 .pin-bottom {
-    position: absolute;
-    bottom: 1rem;
-    left: 1rem;
-}
-
-// 
-.tarot-deck {
-    /* Height based on window dimensions */
-    height: calc(var(--scale) * 8.5);
-    margin: calc(var(--scale) * 0.3) auto;
-}
-
-ul.tarot-spread {
-    /* Setting the required proportions to the cards */
-    width: calc(var(--scale) * 1);
-    height: calc(var(--scale) * 1.7);
-    margin: 0 auto;
-    position: relative;
-    padding: 0;
-    list-style-type: none;
+    margin-bottom: 1rem;
+    width: 100vw;
 }
 
 
 /* Media queries to ensure that the circle always fits the screen */
 
 @media (orientation: landscape) {
-    .tarot-deck {
+    .card-stack {
         --scale: 11vh;
     }
 }
 
 @media (orientation: portrait) {
-    .tarot-deck {
+    .card-stack {
         --scale: 11vw;
     }
 }
 
-.tarot-deck ul.tarot-spread li {
-    border-radius: 5px;
-    padding: 0;
-    border: 1px solid #b3cde0;
+@media (orientation: landscape) and (max-width: 1200px) {
+    .card-stack {
+        --scale: 12vh;
+    }
 }
 
-ul.tarot-spread li {
-    /* Here we duplicate the size of the parent block */
-    width: inherit;
-    height: inherit;
-    margin: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: #fff;
-    pointer-events: auto;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-transform-origin: 50% 235% 0px;
-    transform-origin: 50% 235% 0px;
-    transition: transform 20000ms ease-in 0ms;
+@media (orientation: portrait) and (max-width: 1200px) {
+    .card-stack {
+        --scale: 12vw;
+    }
 }
 
-.tarot-deck li img {
-    display: block;
-    margin: 0 auto;
-    width: 100%;
-    height: 100%;
-    border-radius: 5px;
-    pointer-events: auto;
-    cursor: pointer;
+@media (orientation: landscape) and (max-width: 720px) {
+    .card-stack {
+        --scale: 14vh;
+        margin-left: -20%;
+    }
 }
 
-.tarot-deck li img:hover {
-    opacity: 0.75;
+@media (orientation: portrait) and (max-width: 720px) {
+    .card-stack {
+        --scale: 14vw;
+        margin-left: -20%;
+    }
 }
 
-.tarot-deck li img.card-oracle-image-hidden {
-    display: none;
+@media(max-width: 479px) {
+    .btn-add {
+        position: absolute;
+        top: 1rem;
+        right: 0;
+    }
+}
+
+.hidden {
+    visibility: hidden;
 }
