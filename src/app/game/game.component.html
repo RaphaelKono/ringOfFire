@@ -2,7 +2,7 @@
     <img src="assets/img/bg.jpg">
 </div>
 
-<app-player *ngFor="let player of game.players; let i = index" [ngStyle]="{'top.rem': 4 + (2.5*i)}" [name]="player" [playerActive]="i === game.currentPlayer" class="player-container-pos"></app-player>
+<app-player *ngFor="let player of game.players; let i = index" [ngStyle]="{'top.rem': 6 + (2.5*i)}" [name]="player" [playerActive]="i === game.currentPlayer" class="player-container-pos"></app-player>
 <!-- From the Object game of the exported Class Game (-> models/game.ts) we put the current position in game.players-Array (= Player) as an Input into PlayerComponent (see player.component.ts: @Input() name: string). Same for the playerActive-Boolean (@Input() playerActive: boolean) -->
 
 <div class="game-screen d-flex flex-column justify-content-between align-items-center">
@@ -15,10 +15,12 @@
     </div>
 
     <div class="d-flex justify-content-between pin-bottom align-items-center">
-        <app-game-info [card]="currentCard"></app-game-info>
-        <button mat-fab color="primary" (click)="openDialog()" class="btn-add">+</button>
+        <app-game-info [card]="currentCard" (click)="openDetailsDialog()"></app-game-info>
+        <button mat-fab color="primary" (click)="openAddPlayerDialog()" class="btn-add">+</button>
     </div>
 </div>
+
+
 
 
 <!-- <a href="https://www.flaticon.com/free-icons/beard" title="beard icons">Beard icons created by Freepik - Flaticon</a> -->

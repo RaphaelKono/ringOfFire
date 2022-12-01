@@ -67,6 +67,7 @@
 .player-container-pos {
     position: absolute;
     right: 0;
+    top: 0;
     backdrop-filter: blur(2px);
 }
 
@@ -78,6 +79,13 @@
 .pin-bottom {
     margin-bottom: 1rem;
     width: 100vw;
+}
+
+app-game-info {
+    cursor: pointer;
+    &:hover {
+        filter: brightness(1.1);
+    }
 }
 
 
@@ -97,12 +105,14 @@
 
 @media (orientation: landscape) and (max-width: 1200px) {
     .card-stack {
+        margin-top: -30%;
         --scale: 12vh;
     }
 }
 
 @media (orientation: portrait) and (max-width: 1200px) {
     .card-stack {
+        margin-top: -30%;
         --scale: 12vw;
     }
 }

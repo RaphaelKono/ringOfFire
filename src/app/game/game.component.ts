@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
+import { DialogDetailedInfoComponent } from '../dialog-detailed-info/dialog-detailed-info.component';
 
 @Component({
   selector: 'app-game',
@@ -17,9 +18,14 @@ export class GameComponent implements OnInit {
 
   constructor(public dialog: MatDialog){}
 
-  openDialog(): void {
+  openAddPlayerDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
     dialogRef.afterClosed().subscribe((name: string) => this.validateNewPlayer(name));
+  }
+
+  openDetailsDialog(): void {
+    const dialogRef = this.dialog.open(DialogDetailedInfoComponent);
+    dialogRef.afterClosed().subscribe();
   }
 
   validateNewPlayer(name: string){

@@ -1,13 +1,12 @@
-<mat-card class="example-card">
+<mat-card [card]="currentCard" class="example-card">
     <mat-card-header class="d-flex flex-column-reverse">
         <div class="d-flex justify-content-between">
             <mat-card-subtitle class="font-Rye">{{ card ? subtitle : 'No card picked yet'}}</mat-card-subtitle>
-            <mat-card-subtitle class="font-Rye">Details</mat-card-subtitle>
         </div>
         <mat-card-title class="font-Rye">{{ card ? title : 'Please pick a card...' }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <p class="font-Rye txt-margin">{{ card ? adaptStringlength(longText,36) : '... from the card stack.' }}</p>
+        <p class="font-Rye txt-margin">{{ card ? longText : '... from the card stack.' }}</p>
         <!-- <mat-divider></mat-divider> -->
     </mat-card-content>
     <mat-card-footer>

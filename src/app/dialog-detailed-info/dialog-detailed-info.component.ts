@@ -1,11 +1,12 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { GameInfoComponent } from '../game-info/game-info.component';
 
 @Component({
-  selector: 'app-game-info',
-  templateUrl: './game-info.component.html',
-  styleUrls: ['./game-info.component.scss']
+  selector: 'app-dialog-detailed-info',
+  templateUrl: './dialog-detailed-info.component.html',
+  styleUrls: ['./dialog-detailed-info.component.scss']
 })
-export class GameInfoComponent implements OnInit, OnChanges {
+export class DialogDetailedInfoComponent implements OnInit, OnChanges{
   longText: string = '';
   title: string = '';
   subtitle: string = '';
@@ -27,24 +28,21 @@ export class GameInfoComponent implements OnInit, OnChanges {
     { title: 'Rule', description: 'Make a rule. Everyone needs to drink when he breaks the rule.' }
   ];
 
+
   ngOnInit() {
 
   }
 
   ngOnChanges() {
-    if (this.card)
-      this.setCurrentCardInfo();
+    if (this.card) {
+      let cardNumber = +this.card.split('_')[1];
+      this.title = this.cardAction[cardNumber - 1].title;
+      this.longText = this.cardAction[cardNumber - 1].description;
+      this.subtitle = this.capitalizeFirstLetter(this.card.split('_')[0]) + ` ${cardNumber}`;
+    }
   }
 
-  setCurrentCardInfo(){
-    let cardNumber = +this.card.split('_')[1];
-    this.title = this.cardAction[cardNumber - 1].title;
-    this.longText = this.cardAction[cardNumber - 1].description;
-    this.subtitle = this.capitalizeFirstLetter(this.card.split('_')[0]) + ` ${cardNumber}`;
-  }
-
-
-  capitalizeFirstLetter(string: string) {
+  capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 

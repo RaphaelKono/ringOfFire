@@ -18,6 +18,7 @@ import { GameInfoComponent } from './game-info/game-info.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatDividerModule} from '@angular/material/divider';
+import { DialogDetailedInfoComponent } from './dialog-detailed-info/dialog-detailed-info.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {MatDividerModule} from '@angular/material/divider';
     GameComponent,
     PlayerComponent,
     DialogAddPlayerComponent,
-    GameInfoComponent
+    GameInfoComponent,
+    DialogDetailedInfoComponent
   ],
   imports: [
     BrowserModule,
