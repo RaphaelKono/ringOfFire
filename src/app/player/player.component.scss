@@ -25,10 +25,22 @@
     background-color: rgba(161, 21, 77, 0.5);
 }
 
+@media (orientation: landscape) and (max-width: 1400px) {
+    .player-container {
+        width: 12rem;
+    }
+}
+
+@media (orientation: portrait) and (max-width: 1400px) {
+    .player-container {
+        width: 12rem;
+    }
+}
+
 @media(max-width:1200px) {
     .player-container {
         gap: .5rem;
-        width: 5rem;
+        width: unset;
         padding: 0 .5rem 0 0;
     }
     .shortname {

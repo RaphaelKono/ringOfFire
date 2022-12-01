@@ -10,7 +10,7 @@ export class DialogDetailedInfoComponent implements OnInit, OnChanges{
   longText: string = '';
   title: string = '';
   subtitle: string = '';
-  @Input() card: string;
+  card: string;
 
   cardAction = [
     { title: 'Waterfall', description: 'Everyone has to start drinking at the same time. As soon as player 1 stops drinking, player 2 may stop drinking. Player 3 may stop as soon as player 2 stops drinking, and so on.' },
@@ -30,16 +30,16 @@ export class DialogDetailedInfoComponent implements OnInit, OnChanges{
 
 
   ngOnInit() {
-
-  }
-
-  ngOnChanges() {
     if (this.card) {
       let cardNumber = +this.card.split('_')[1];
       this.title = this.cardAction[cardNumber - 1].title;
       this.longText = this.cardAction[cardNumber - 1].description;
       this.subtitle = this.capitalizeFirstLetter(this.card.split('_')[0]) + ` ${cardNumber}`;
     }
+  }
+
+  ngOnChanges() {
+    
   }
 
   capitalizeFirstLetter(string) {

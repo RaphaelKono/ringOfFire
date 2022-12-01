@@ -10,6 +10,8 @@ export class Game {
             this.stack.push('clubs_' + i);
             this.stack.push('diamonds_' + i);
             this.stack.push('hearts_'+i);
+            this.players.push('Raphael');
+            this.players.push('Raphael');
         }
         this.shuffle();
     }

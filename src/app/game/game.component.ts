@@ -16,6 +16,7 @@ export class GameComponent implements OnInit {
   currentCard: string = '';
   game: Game;
 
+
   constructor(public dialog: MatDialog){}
 
   openAddPlayerDialog(): void {
@@ -25,6 +26,7 @@ export class GameComponent implements OnInit {
 
   openDetailsDialog(): void {
     const dialogRef = this.dialog.open(DialogDetailedInfoComponent);
+    dialogRef.componentInstance.card = this.currentCard;
     dialogRef.afterClosed().subscribe();
   }
 
@@ -63,5 +65,9 @@ export class GameComponent implements OnInit {
   changeCurrentPlayer(){
     this.game.currentPlayer++;
     this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+  }
+
+  gameIsFull(){
+    return this.game.players.length < 9;
   }
 }

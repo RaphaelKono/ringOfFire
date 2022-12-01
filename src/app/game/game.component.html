@@ -2,8 +2,10 @@
     <img src="assets/img/bg.jpg">
 </div>
 
-<app-player *ngFor="let player of game.players; let i = index" [ngStyle]="{'top.rem': 6 + (2.5*i)}" [name]="player" [playerActive]="i === game.currentPlayer" class="player-container-pos"></app-player>
-<!-- From the Object game of the exported Class Game (-> models/game.ts) we put the current position in game.players-Array (= Player) as an Input into PlayerComponent (see player.component.ts: @Input() name: string). Same for the playerActive-Boolean (@Input() playerActive: boolean) -->
+<div class="players-container">
+    <app-player *ngFor="let player of game.players; let i = index" [ngStyle]="{'top.rem': 6 + (2.5*i)}" [name]="player" [playerActive]="i === game.currentPlayer" class="player-container-pos"></app-player>
+    <!-- From the Object game of the exported Class Game (-> models/game.ts) we put the current position in game.players-Array (= Player) as an Input into PlayerComponent (see player.component.ts: @Input() name: string). Same for the playerActive-Boolean (@Input() playerActive: boolean) -->
+</div>
 
 <div class="game-screen d-flex flex-column justify-content-between align-items-center">
     <div></div>
