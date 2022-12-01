@@ -30,12 +30,15 @@ export class DialogDetailedInfoComponent implements OnInit, OnChanges{
 
 
   ngOnInit() {
-    if (this.card) {
-      let cardNumber = +this.card.split('_')[1];
-      this.title = this.cardAction[cardNumber - 1].title;
-      this.longText = this.cardAction[cardNumber - 1].description;
-      this.subtitle = this.capitalizeFirstLetter(this.card.split('_')[0]) + ` ${cardNumber}`;
-    }
+    if (this.card)
+      this.setCurrentCardInfo();
+  }
+
+  setCurrentCardInfo(){
+    let cardNumber = +this.card.split('_')[1];
+    this.title = this.cardAction[cardNumber - 1].title;
+    this.longText = this.cardAction[cardNumber - 1].description;
+    this.subtitle = this.capitalizeFirstLetter(this.card.split('_')[0]) + ` ${cardNumber}`;
   }
 
   ngOnChanges() {

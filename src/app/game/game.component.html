@@ -10,15 +10,15 @@
 <div class="game-screen d-flex flex-column justify-content-between align-items-center">
     <div></div>
     <div class="card-stack">
-        <img [class.hidden]="c == ''" *ngFor="let c of game.stack; let i = index;" [ngStyle]="{'right.px': i*0, 'top.px':i*0, 'transform': 'rotate('+i*(360/game.stack.length)+'deg)', '-webkit-transform': 'rotate('+i*(360/game.stack.length)+'deg)', '-ms-transform': 'rotate('+i*(360/game.stack.length)+'deg)'}"
+        <img (hover)="transformCard(10)" [class.hidden]="c == ''" *ngFor="let c of game.stack; let i = index;" [ngStyle]="{'right.px': i*0, 'top.px':i*0, 'transform': 'rotate('+i*(360/game.stack.length)+'deg)', '-webkit-transform': 'rotate('+i*(360/game.stack.length)+'deg)', '-ms-transform': 'rotate('+i*(360/game.stack.length)+'deg)'}"
             (click)="pickCard(i)" class="card-from-stack top-card" src="assets/img/cards/card_cover.png">
-        <img *ngFor="let card of game.playedCards;" class="played-card" src="assets/img/cards/{{ card }}.png">
+        <img *ngFor="let card of game.playedCards;" (click)="openDetailsDialog()" class="played-card" src="assets/img/cards/{{ card }}.png">
         <img *ngIf="pickCardAnimation" class="pick-card" src="assets/img/cards/{{ currentCard }}.png">
     </div>
 
     <div class="d-flex justify-content-between pin-bottom align-items-center">
         <app-game-info [card]="currentCard" (click)="openDetailsDialog()"></app-game-info>
-        <button mat-fab color="primary" (click)="openAddPlayerDialog()" class="btn-add">+</button>
+        <button *ngIf="gameIsFull()" mat-fab color="primary" (click)="openAddPlayerDialog()" class="btn-add">+</button>
     </div>
 </div>
 

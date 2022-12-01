@@ -27,9 +27,7 @@ export class GameInfoComponent implements OnInit, OnChanges {
     { title: 'Rule', description: 'Make a rule. Everyone needs to drink when he breaks the rule.' }
   ];
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   ngOnChanges() {
     if (this.card)

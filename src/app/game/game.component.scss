@@ -35,7 +35,6 @@
 .card-from-stack {
     &:hover {
         filter: brightness(0.7);
-        transform-origin: 50% 155% 0;
         cursor: pointer;
     }
 }
@@ -62,6 +61,10 @@
 
 .played-card {
     transform: scale(1) translateX(-50%) translateY(110%) rotate(15deg);
+    &:hover {
+        cursor: pointer;
+        filter: brightness(0.8);
+    }
 }
 
 .player-container-pos {

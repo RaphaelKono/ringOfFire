@@ -70,4 +70,8 @@ export class GameComponent implements OnInit {
   gameIsFull(){
     return this.game.players.length < 9;
   }
+
+  transformCard(c: number){
+    console.log(c);
+  }
 }
