@@ -3,6 +3,7 @@ import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { DialogDetailedInfoComponent } from '../dialog-detailed-info/dialog-detailed-info.component';
+import { GameInfoHelperService } from 'src/services/game-info-helper.service';
 
 @Component({
   selector: 'app-game',
@@ -15,9 +16,11 @@ export class GameComponent implements OnInit {
   pickCardAnimation = false;
   currentCard: string = '';
   game: Game;
+  playedKings: number = 0;
+  gameEnd = false;
 
 
-  constructor(public dialog: MatDialog){}
+  constructor(public dialog: MatDialog, public gameInfoHelper: GameInfoHelperService){}
 
   openAddPlayerDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
@@ -26,7 +29,6 @@ export class GameComponent implements OnInit {
 
   openDetailsDialog(): void {
     const dialogRef = this.dialog.open(DialogDetailedInfoComponent);
-    dialogRef.componentInstance.card = this.currentCard;
     dialogRef.afterClosed().subscribe();
   }
 
@@ -40,18 +42,30 @@ export class GameComponent implements OnInit {
   }
 
   newGame() {
+    this.playedKings = 0;
+    this.gameEnd = false;
     this.game = new Game();
   }
 
   pickCard(index: number) {
     if (!this.pickCardAnimation)
-      this.updateCards(index);
+      this.update(index);
+  }
+
+  update(index: number){
+    this.updateCards(index);
+    this.updateGame();
   }
 
   updateCards(index: number){
     this.currentCard = this.game.stack[index];
+    this.gameInfoHelper.card = this.currentCard;
+    this.gameInfoHelper.setCurrentCardInfo();
     this.game.stack[index] = "";
     this.pickCardAnimation = true;
+  }
+
+  updateGame(){
     if (this.game.players.length > 0)
       this.changeCurrentPlayer();
     setTimeout(() => this.setPickedCard(), 1500);
@@ -59,7 +73,11 @@ export class GameComponent implements OnInit {
 
   setPickedCard(){
     this.game.playedCards.push(this.currentCard);
-    this.pickCardAnimation = false
+    if (this.currentCard.includes('13'))
+      this.playedKings++;
+    this.pickCardAnimation = false;
+    if(this.playedKings === 4)
+      this.gameEnd = true;
   }
 
   changeCurrentPlayer(){
@@ -68,10 +86,6 @@ export class GameComponent implements OnInit {
   }
 
   gameIsFull(){
-    return this.game.players.length < 9;
-  }
-
-  transformCard(c: number){
-    console.log(c);
+    return this.game.players.length > 7;
   }
 }

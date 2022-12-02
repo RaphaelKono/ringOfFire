@@ -1,3 +1,12 @@
+@import url(../start-screen/start-screen.component.scss);
+.endscreen {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
 .game-screen {
     min-height: 100vh;
 }
@@ -27,8 +36,9 @@
         display: block;
         width: 100%;
         height: 100%;
-        -webkit-transform-origin: 50% 235% 0;
+        // -webkit-transform-origin: 50% 235% 0;
         transform-origin: 50% 170% 0;
+        // transform: translateX(calc(var(--scale) * 1)) translateY(calc(var(--scale) * 1.7));
     }
 }
 
@@ -72,6 +82,7 @@
     right: 0;
     top: 0;
     backdrop-filter: blur(2px);
+    z-index: 3;
 }
 
 .btn-add {
@@ -120,10 +131,10 @@ app-game-info {
     }
 }
 
-@media (orientation: landscape) and (max-width: 720px) {
+@media (orientation: landscape) and (max-width: 720px),
+(max-height:600px) {
     .card-stack {
         --scale: 14vh;
-        margin-left: -20%;
     }
 }
 
@@ -134,10 +145,30 @@ app-game-info {
     }
 }
 
-@media(max-width: 479px) {
+@media(max-height:540px) {
+    .card-stack {
+        margin-top: -15%;
+    }
+}
+
+@media(max-height:440px) {
+    .card-stack {
+        margin-top: -10%;
+    }
+}
+
+@media(max-height:319px) {
+    .card-stack {
+        margin-top: -5%;
+    }
+}
+
+@media(max-width: 479px),
+(max-height:370px) {
     .btn-add {
         position: absolute;
         top: 1rem;
+        left: 1rem;
         right: 0;
     }
 }

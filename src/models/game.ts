@@ -1,5 +1,5 @@
 export class Game {
-    public players: string[] = ['Raphael','Raphael','Raphael','Raphael','Raphael','Raphael','Raphael'];
+    public players: string[] = [];
     public stack: string[] = [];
     public playedCards: string[] = [];
     public currentPlayer: number = 0;
@@ -16,7 +16,6 @@ export class Game {
 
     shuffle() {
         let currentIndex: number = this.stack.length,  randomIndex: number;
-        // While there remain elements to shuffle.
         while (currentIndex != 0)
             currentIndex = this.pickAndSwapElement(currentIndex, randomIndex);
       }

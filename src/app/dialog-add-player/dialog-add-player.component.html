@@ -3,7 +3,7 @@
     <p>Please enter your name</p>
     <mat-form-field appearance="fill">
         <mat-label>Name</mat-label>
-        <input matInput [(ngModel)]="name">
+        <input required maxlength="9" appForbiddenName="adolf" matInput [(ngModel)]="name">
     </mat-form-field>
 </div>
 <div mat-dialog-actions>

@@ -1,13 +1,12 @@
-<mat-card class="example-card">
+<mat-card class="example-card-dialog">
     <mat-card-header class="d-flex flex-column-reverse">
         <div class="d-flex justify-content-between">
-            <mat-card-subtitle class="font-Rye">{{ card ? subtitle : 'No card picked yet'}}</mat-card-subtitle>
+            <mat-card-subtitle class="font-Rye subtitle-info">{{ gameInfoHelper.card ? gameInfoHelper.subtitle : 'No card picked yet'}}</mat-card-subtitle>
         </div>
-        <mat-card-title class="font-Rye">{{ card ? title : 'Please pick a card...' }}</mat-card-title>
+        <mat-card-title class="font-Rye title-info">{{ gameInfoHelper.card ? gameInfoHelper.title : 'Please pick a card...' }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <p class="font-Rye txt-margin">{{ card ? longText : '... from the card stack.' }}</p>
-        <!-- <mat-divider></mat-divider> -->
+        <p class="font-Rye txt-margin long-text-info">{{ gameInfoHelper.card ? gameInfoHelper.longText : '... from the card stack.' }}</p>
     </mat-card-content>
     <mat-card-footer>
         <mat-progress-bar mode="indeterminate"></mat-progress-bar>
