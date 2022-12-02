@@ -1,5 +1,4 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { GameInfoComponent } from '../game-info/game-info.component';
 
 @Component({
   selector: 'app-dialog-detailed-info',
@@ -45,7 +44,7 @@ export class DialogDetailedInfoComponent implements OnInit, OnChanges{
     
   }
 
-  capitalizeFirstLetter(string) {
+  capitalizeFirstLetter(string: string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 

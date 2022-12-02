@@ -10,7 +10,7 @@
 <div class="game-screen d-flex flex-column justify-content-between align-items-center">
     <div></div>
     <div class="card-stack">
-        <img (hover)="transformCard(10)" [class.hidden]="c == ''" *ngFor="let c of game.stack; let i = index;" [ngStyle]="{'right.px': i*0, 'top.px':i*0, 'transform': 'rotate('+i*(360/game.stack.length)+'deg)', '-webkit-transform': 'rotate('+i*(360/game.stack.length)+'deg)', '-ms-transform': 'rotate('+i*(360/game.stack.length)+'deg)'}"
+        <img (mouseenter)="transformCard(10)" [class.hidden]="c == ''" *ngFor="let c of game.stack; let i = index;" [ngStyle]="{'right.px': i*0, 'top.px':i*0, 'transform': 'rotate('+i*(360/game.stack.length)+'deg)', '-webkit-transform': 'rotate('+i*(360/game.stack.length)+'deg)', '-ms-transform': 'rotate('+i*(360/game.stack.length)+'deg)'}"
             (click)="pickCard(i)" class="card-from-stack top-card" src="assets/img/cards/card_cover.png">
         <img *ngFor="let card of game.playedCards;" (click)="openDetailsDialog()" class="played-card" src="assets/img/cards/{{ card }}.png">
         <img *ngIf="pickCardAnimation" class="pick-card" src="assets/img/cards/{{ currentCard }}.png">
