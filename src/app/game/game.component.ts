@@ -4,6 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { DialogDetailedInfoComponent } from '../dialog-detailed-info/dialog-detailed-info.component';
 import { GameInfoHelperService } from 'src/services/game-info-helper.service';
+import { Firestore, collectionData, collection, doc, setDoc } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-game',
@@ -18,9 +20,30 @@ export class GameComponent implements OnInit {
   game: Game;
   playedKings: number = 0;
   gameEnd = false;
+  game$: Observable<any>;
 
+  constructor(public dialog: MatDialog, public gameInfoHelper: GameInfoHelperService, private firestore: Firestore) {
+    const coll = collection(this.firestore, 'games');
+    this.game$ = collectionData(coll);
+    this.game$.subscribe((game) => {
+      console.log('Game update: ', game);
+    });
+  }
 
-  constructor(public dialog: MatDialog, public gameInfoHelper: GameInfoHelperService){}
+  ngOnInit(): void {
+    this.newGame();
+  }
+
+  async newGame() {
+    this.playedKings = 0;
+    this.gameEnd = false;
+    this.game = new Game();
+    await setDoc(doc(this.game$, "games"), {
+      name: "Los Angeles",
+      state: "CA",
+      country: "USA"
+    });
+  }
 
   openAddPlayerDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
@@ -32,19 +55,9 @@ export class GameComponent implements OnInit {
     dialogRef.afterClosed().subscribe();
   }
 
-  validateNewPlayer(name: string){
+  validateNewPlayer(name: string) {
     if (name && name.length > 0)
       this.game.players.push(name);
-  }
-
-  ngOnInit(): void {
-    this.newGame();
-  }
-
-  newGame() {
-    this.playedKings = 0;
-    this.gameEnd = false;
-    this.game = new Game();
   }
 
   pickCard(index: number) {
@@ -52,12 +65,12 @@ export class GameComponent implements OnInit {
       this.update(index);
   }
 
-  update(index: number){
+  update(index: number) {
     this.updateCards(index);
     this.updateGame();
   }
 
-  updateCards(index: number){
+  updateCards(index: number) {
     this.currentCard = this.game.stack[index];
     this.gameInfoHelper.card = this.currentCard;
     this.gameInfoHelper.setCurrentCardInfo();
@@ -65,27 +78,27 @@ export class GameComponent implements OnInit {
     this.pickCardAnimation = true;
   }
 
-  updateGame(){
+  updateGame() {
     if (this.game.players.length > 0)
       this.changeCurrentPlayer();
     setTimeout(() => this.setPickedCard(), 1500);
   }
 
-  setPickedCard(){
+  setPickedCard() {
     this.game.playedCards.push(this.currentCard);
     if (this.currentCard.includes('13'))
       this.playedKings++;
     this.pickCardAnimation = false;
-    if(this.playedKings === 4)
+    if (this.playedKings === 4)
       this.gameEnd = true;
   }
 
-  changeCurrentPlayer(){
+  changeCurrentPlayer() {
     this.game.currentPlayer++;
     this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
   }
 
-  gameIsFull(){
+  gameIsFull() {
     return this.game.players.length > 7;
   }
 }
