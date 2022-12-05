@@ -35,4 +35,13 @@ export class Game {
         [this.stack[currentIndex], this.stack[randomIndex]] = [
             this.stack[randomIndex], this.stack[currentIndex]];
     }
+
+    public toJson(){
+        return {
+            players: this.players,
+            stack: this.stack,
+            playedCards: this.playedCards,
+            currentPlayer: this.currentPlayer
+        }
+    }
 }
