@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { DialogDetailedInfoComponent } from '../dialog-detailed-info/dialog-detailed-info.component';
 import { GameInfoHelperService } from 'src/services/game-info-helper.service';
-import { Firestore, collectionData, collection, doc, setDoc } from '@angular/fire/firestore';
+import { Firestore, collectionData, collection, doc, setDoc, docData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
@@ -27,23 +27,24 @@ export class GameComponent implements OnInit {
 }
 
   ngOnInit(): void {
-    this.route.params.subscribe((param: any) => {
-      this.gameID = param.id;
-      let coll = collection(this.firestore, 'games');
-      console.log(coll);
-      let game$ = collectionData(coll);
-      console.log(game$);
-      game$.subscribe((game) => console.log(game));
-    });
+    this.route.params.subscribe((param: any) => this.subscribeCurrentRoute(param));
     this.newGame();
+  }
+
+  subscribeCurrentRoute(param: any){
+    this.gameID = param.id;
+    let coll = collection(this.firestore, 'games');
+    let docRef = doc(coll, this.gameID);
+    let game$ = docData(docRef);
+    game$.subscribe((game) => this.subscribeCurrentGameParameters(game));
   }
 
   async newGame() {
     this.playedKings = 0;
     this.gameEnd = false;
     this.game = new Game();
-    // let coll = collection(this.firestore, 'games');
-    // await setDoc(doc(coll, this.gameID), this.game.toJson());
+    let coll = collection(this.firestore, 'games');
+    await setDoc(doc(coll, this.gameID), this.game.toJson());
     // await setDoc(doc(coll), this.game.toJson());
   }
 
@@ -105,10 +106,10 @@ export class GameComponent implements OnInit {
   }
 
   subscribeCurrentGameParameters(game: any){
-    console.log(game);
-    // this.game.players = game.players;
-    // this.game.currentPlayer = game.currentPlayer;
-    // this.game.stack = game.stack;
-    // this.game.playedCards = game.playedCards;
+    this.game.players = game.players;
+    this.game.currentPlayer = game.currentPlayer;
+    this.game.stack = game.stack;
+    this.game.playedCards = game.playedCards;
+    console.log(this.game);
   }
 }
