@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { ReactiveFormsModule, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-dialog-add-player',

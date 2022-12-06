@@ -4,7 +4,6 @@
 
 <div class="players-container">
     <app-player *ngFor="let player of game.players; let i = index" [ngStyle]="{'top.rem': 1 + (2.2*i)}" [name]="player" [playerActive]="i === game.currentPlayer" class="player-container-pos"></app-player>
-    <!-- From the Object game of the exported Class Game (-> models/game.ts) we put the current position in game.players-Array (= Player) as an Input into PlayerComponent (see player.component.ts: @Input() name: string). Same for the playerActive-Boolean (@Input() playerActive: boolean) -->
 </div>
 
 <div class="game-screen d-flex flex-column justify-content-between align-items-center">
@@ -13,16 +12,16 @@
         <img [class.hidden]="c == ''" *ngFor="let c of game.stack; let i = index;" [ngStyle]="{'right.px': i*0, 'top.px':i*0, 'transform': 'rotate('+i*(360/game.stack.length)+'deg)', '-webkit-transform': 'rotate('+i*(360/game.stack.length)+'deg)', '-ms-transform': 'rotate('+i*(360/game.stack.length)+'deg)'}"
             (click)="pickCard(i)" class="card-from-stack top-card" src="assets/img/cards/card_cover.png">
         <img *ngFor="let card of game.playedCards;" (click)="openDetailsDialog()" class="played-card" src="assets/img/cards/{{ card }}.png">
-        <img *ngIf="pickCardAnimation" class="pick-card" src="assets/img/cards/{{ currentCard }}.png">
+        <img *ngIf="game.pickCardAnimation" class="pick-card" src="assets/img/cards/{{ game.currentCard }}.png">
     </div>
 
     <div class="d-flex justify-content-between pin-bottom align-items-center">
-        <app-game-info (click)="openDetailsDialog()"></app-game-info>
+        <app-game-info [card]="game.currentCard" (click)="openDetailsDialog()"></app-game-info>
         <button *ngIf="!gameIsFull()" mat-fab color="primary" (click)="openAddPlayerDialog()" class="btn-add">+</button>
     </div>
 </div>
 
-<div *ngIf="gameEnd" class="endscreen d-flex justify-content-center align-items-center" [ngStyle]="{'z-index':10}">
+<div *ngIf="game.gameEnd" class="endscreen d-flex justify-content-center align-items-center" [ngStyle]="{'z-index':10}">
     <div class="startscreen-container">
         <img class="startscreen-img" src="assets/img/startscreen.jpg">
     </div>
@@ -43,6 +42,7 @@
         </mat-card>
     </div>
 </div>
+
 
 
 

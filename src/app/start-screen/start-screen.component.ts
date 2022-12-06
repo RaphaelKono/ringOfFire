@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Game } from 'src/models/game';
-import { Firestore, collectionData, collection, doc, getDoc, setDoc, docData, DocumentSnapshot } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogJoinGameComponent } from '../dialog-join-game/dialog-join-game.component';
 
 @Component({
   selector: 'app-start-screen',
@@ -10,16 +12,21 @@ import { Firestore, collectionData, collection, doc, getDoc, setDoc, docData, Do
 })
 export class StartScreenComponent {
 
-  constructor(private firestore: Firestore, private router: Router){}
+  constructor(private firestore: Firestore, private router: Router, public dialog: MatDialog){}
   
   async newGame() {
     let game = new Game();
     let coll = collection(this.firestore, 'games');
-    let data = collectionData(coll);
-    let docRef = doc(coll);
-    let test = await getDoc(doc(coll));
-    test.then((response) => console.log('No idea'));
+    let docRef = await addDoc(coll, game.toJson());
+    this.router.navigateByUrl('game/'+docRef.id);
+  }
 
-    // this.router.navigateByUrl('game');
+  joinGame(){
+    const dialogRef = this.dialog.open(DialogJoinGameComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.router.navigateByUrl('game/'+result);
+      }
+    });
   }
 }

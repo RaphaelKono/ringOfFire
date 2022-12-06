@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Join Game</h1>
+<div mat-dialog-content>
+    <p>Please put in your game-id</p>
+    <mat-form-field appearance="fill">
+        <mat-label>Game id</mat-label>
+        <input name="gameIdField" required pattern="[\w]{20,}" matInput [(ngModel)]="gameId">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [mat-dialog-close]="gameId" cdkFocusInitial>Ok</button>
+</div>

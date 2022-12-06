@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { GameInfoHelperService } from 'src/services/game-info-helper.service';
 
 @Component({
@@ -6,20 +6,17 @@ import { GameInfoHelperService } from 'src/services/game-info-helper.service';
   templateUrl: './game-info.component.html',
   styleUrls: ['./game-info.component.scss']
 })
-export class GameInfoComponent implements OnInit {
 
 
 
-  constructor(public gameInfoHelper: GameInfoHelperService) { }
+export class GameInfoComponent implements OnInit, OnChanges {
+  @Input() card: string;
 
-  ngOnInit() {
-  }
+  constructor(public gameInfoHelper: GameInfoHelperService) {}
 
-  onResize(){
-    this.bigScreen();
-  }
+  ngOnInit() {}
 
-  bigScreen() {
-    return window.innerHeight > 600 && window.innerWidth > window.innerHeight;
+  ngOnChanges(changes: SimpleChanges): void {
+    this.gameInfoHelper.setCard(this.card);
   }
 }

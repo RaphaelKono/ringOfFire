@@ -64,6 +64,10 @@ mat-card-subtitle {
     margin: 2rem;
 }
 
+.startscreen-btns-container {
+    display: flex !important;
+}
+
 .fadeIn {
     animation: fadeInAnimation 1s ease-in-out;
 }

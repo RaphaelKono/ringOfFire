@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, OnChanges, SimpleChanges} from '@angular/core';
 import { GameInfoHelperService } from 'src/services/game-info-helper.service';
 
 
@@ -7,6 +7,10 @@ import { GameInfoHelperService } from 'src/services/game-info-helper.service';
   templateUrl: './dialog-detailed-info.component.html',
   styleUrls: ['./dialog-detailed-info.component.scss']
 })
-export class DialogDetailedInfoComponent{
+export class DialogDetailedInfoComponent implements OnChanges{
   constructor (public gameInfoHelper: GameInfoHelperService){}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    
+  }
 }

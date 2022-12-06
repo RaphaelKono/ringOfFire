@@ -1,16 +1,11 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class GameInfoHelperService {
+@Injectable({providedIn: 'root'}) export class GameInfoHelperService {
 
   longText: string = '';
   title: string = '';
   subtitle: string = '';
   card: string = '';
-
-  constructor() {}
 
   cardAction = [
     { title: 'Waterfall', description: 'Everyone has to start drinking at the same time. As soon as player 1 stops drinking, player 2 may stop drinking. Player 3 may stop as soon as player 2 stops drinking, and so on.' },
@@ -27,6 +22,14 @@ export class GameInfoHelperService {
     { title: 'Never have i ever...', description: 'Say something you never did. Everyone who did it has to drink.' },
     { title: 'Rule', description: 'Make a rule. Everyone needs to drink when he breaks the rule. Game ends when all kings are picked.' }
   ];
+
+  constructor() {}
+
+  setCard(card:string){
+    this.card = card;
+    if(this.card)
+      this.setCurrentCardInfo();
+  }
 
   setCurrentCardInfo() {
     let cardNumber = +this.card.split('_')[1];

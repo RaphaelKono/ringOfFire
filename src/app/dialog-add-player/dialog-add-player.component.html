@@ -3,7 +3,8 @@
     <p>Please enter your name</p>
     <mat-form-field appearance="fill">
         <mat-label>Name</mat-label>
-        <input required maxlength="9" appForbiddenName="adolf" matInput [(ngModel)]="name">
+        <input required maxlength="9" pattern="/\b(?:(?:ass+(?:\s+)?|i+(?:\s+)?|butt+(?:\s+)?|mo(?:(?:m|t|d)h?(?:e|a)?r?)(?:\s+)?)?f(?:(?:\s+)?u+)?(?:(?:\s+)?c+)?(?:(?:\s+)?k+)?(?:(?:e|a)(?:r+)?|i(?:n(?:g)?)?)?(?:s+)?(?:\s+)?(?:hole|head|(?:yo?)?u?)?)+\b/igm"
+            appForbiddenName="adolf" matInput [(ngModel)]="name">
     </mat-form-field>
 </div>
 <div mat-dialog-actions>
