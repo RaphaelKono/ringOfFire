@@ -1,49 +1,52 @@
-<div class="game-screen-background">
-    <img src="assets/img/bg.jpg">
-</div>
+<div class="game-component">
+    <div class="game-screen-background">
+        <img src="assets/img/bg.jpg">
+    </div>
 
-<div class="players-container">
+    <!-- <div class="players-container">
     <app-player *ngFor="let player of game.players; let i = index" [ngStyle]="{'top.rem': 1 + (2.2*i)}" [name]="player" [playerActive]="i === game.currentPlayer" class="player-container-pos"></app-player>
-</div>
+</div> -->
 
-<div class="game-screen d-flex flex-column justify-content-between align-items-center">
-    <div></div>
-    <div class="card-stack">
-        <img [class.hidden]="c == ''" *ngFor="let c of game.stack; let i = index;" [ngStyle]="{'right.px': i*0, 'top.px':i*0, 'transform': 'rotate('+i*(360/game.stack.length)+'deg)', '-webkit-transform': 'rotate('+i*(360/game.stack.length)+'deg)', '-ms-transform': 'rotate('+i*(360/game.stack.length)+'deg)'}"
-            (click)="pickCard(i)" class="card-from-stack top-card" src="assets/img/cards/card_cover.png">
-        <img *ngFor="let card of game.playedCards;" (click)="openDetailsDialog()" class="played-card" src="assets/img/cards/{{ card }}.png">
-        <img *ngIf="game.pickCardAnimation" class="pick-card" src="assets/img/cards/{{ game.currentCard }}.png">
+    <div class="container">
+        <div class="card-deck">
+            <ul class="card-spread">
+                <li [class.hidden]="c == ''" *ngFor="let c of game.stack; let i = index;" (click)="pickCard(i)" [ngStyle]="{'transform': 'rotate('+i*(360/game.stack.length)+'deg)', '-webkit-transform': 'rotate('+i*(360/game.stack.length)+'deg)', '-ms-transform': 'rotate('+i*(360/game.stack.length)+'deg)'}">
+                    <img class="card-img" src="assets/img/cards/card_cover.png">
+                </li>
+                <img *ngFor="let card of game.playedCards;" (click)="openDetailsDialog()" class="card-img played-card" src="assets/img/cards/{{ card }}.png">
+                <img *ngIf="game.pickCardAnimation" class="card-img pick-card" src="assets/img/cards/{{ game.currentCard }}.png">
+            </ul>
+        </div>
     </div>
 
-    <div class="d-flex justify-content-between pin-bottom align-items-center">
+    <div class="bottom-container">
         <app-game-info [card]="game.currentCard" (click)="openDetailsDialog()"></app-game-info>
-        <button *ngIf="!gameIsFull()" mat-fab color="primary" (click)="openAddPlayerDialog()" class="btn-add">+</button>
     </div>
+    <button *ngIf="!gameIsFull()" mat-fab color="primary" (click)="openAddPlayerDialog()" class="btn-add-player">+</button>
+
+    <div *ngIf="game.gameEnd" class="endscreen d-flex justify-content-center align-items-center" [ngStyle]="{'z-index':10}">
+        <div class="startscreen-container">
+            <img class="startscreen-img" src="assets/img/startscreen.jpg">
+        </div>
+        <div class="startscreen-container startscreen-overlay">
+            <mat-card class="example-card startscreen-frame">
+                <mat-card-header>
+                    <mat-card-title class="txt-center font-Rye fadeIn">
+                        End
+                    </mat-card-title>
+                    <mat-card-subtitle class="txt-center font-Rye fadeIn">
+                        All four kings are picked.
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-content>
+                    <button mat-button color="primary" (click)="ngOnInit()" class="start-btn fadeIn">Restart Game</button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
 </div>
-
-<div *ngIf="game.gameEnd" class="endscreen d-flex justify-content-center align-items-center" [ngStyle]="{'z-index':10}">
-    <div class="startscreen-container">
-        <img class="startscreen-img" src="assets/img/startscreen.jpg">
-    </div>
-    <div class="startscreen-container startscreen-overlay">
-        <mat-card class="example-card startscreen-frame">
-            <mat-card-header>
-                <mat-card-title class="txt-center font-Rye fadeIn">
-                    End
-                </mat-card-title>
-                <mat-card-subtitle class="txt-center font-Rye fadeIn">
-                    All four kings are picked.
-                </mat-card-subtitle>
-            </mat-card-header>
-            <mat-divider></mat-divider>
-            <mat-card-content>
-                <button mat-button color="primary" (click)="ngOnInit()" class="start-btn fadeIn">Restart Game</button>
-            </mat-card-content>
-        </mat-card>
-    </div>
-</div>
-
-
 
 
 

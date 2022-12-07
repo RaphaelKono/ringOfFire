@@ -1,4 +1,12 @@
 @import url(../start-screen/start-screen.component.scss);
+.game-component {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
+
 .endscreen {
     position: absolute;
     top: 0;
@@ -26,32 +34,12 @@
     }
 }
 
-.card-stack {
-    position: relative;
-    margin-top: -20%;
-    width: calc(var(--scale) * 1);
-    height: calc(var(--scale) * 1.7);
-    img {
-        position: absolute;
-        display: block;
-        width: 100%;
-        height: 100%;
-        -webkit-transform-origin: 50% 170% 0;
-        transform-origin: 50% 170% 0;
-    }
-}
-
-.card-from-stack {
-    &:hover {
-        filter: brightness(0.7);
-        cursor: pointer;
-    }
-}
-
 .pick-card {
+    position: absolute;
+    top: 0;
     animation: pick-card-animation 1.25s ease-in-out;
-    -webkit-transform: scale(1) translateX(-50%) translateY(110%) rotate(15deg);
-    transform: scale(1) translateX(-50%) translateY(110%) rotate(15deg);
+    -webkit-transform: scale(1.2) translateY(165%) rotate(15deg);
+    transform: scale(1.2) translateY(165%) rotate(15deg);
 }
 
 @keyframes pick-card-animation {
@@ -68,13 +56,15 @@
         transform: scale(1.5);
     }
     100% {
-        -webkit-transform: scale(1) translateX(-50%) translateY(110%) rotate(15deg);
-        transform: scale(1) translateX(-50%) translateY(110%) rotate(15deg);
+        -webkit-transform: scale(1.2) translateY(165%) rotate(15deg);
+        transform: scale(1.2) translateY(165%) rotate(15deg);
     }
 }
 
 .played-card {
-    transform: scale(1) translateX(-50%) translateY(110%) rotate(15deg);
+    position: absolute;
+    top: 0;
+    transform: scale(1.2) translateY(165%) rotate(15deg);
     &:hover {
         cursor: pointer;
         filter: brightness(0.8);
@@ -89,14 +79,16 @@
     z-index: 3;
 }
 
-.btn-add {
-    font-size: 2rem;
-    margin-right: 1rem;
+.bottom-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
 
-.pin-bottom {
-    margin-bottom: 1rem;
-    width: 100vw;
+.btn-add-player {
+    position: absolute;
+    bottom: 1rem;
+    right: .5rem;
 }
 
 app-game-info {
@@ -106,76 +98,61 @@ app-game-info {
     }
 }
 
+.card-deck {
+    /* Height based on window dimensions */
+    height: calc(var(--scale) * 8.5);
+    margin: calc(var(--scale) * 0.3) auto;
+}
 
-/* Media queries to ensure that the circle always fits the screen */
+.card-spread {
+    /* Setting the required proportions to the cards */
+    width: calc(var(--scale) * 1);
+    height: calc(var(--scale) * 1.7);
+    margin: 0 auto;
+    position: relative;
+    padding: 0;
+    list-style-type: none;
+    li {
+        padding: 0;
+        /* Here we duplicate the size of the parent block */
+        width: inherit;
+        height: inherit;
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        pointer-events: auto;
+        -webkit-transform-origin: 50% 235% 0px;
+        transform-origin: 50% 235% 0px;
+    }
+}
+
+.card-img {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    pointer-events: auto;
+    cursor: pointer;
+    &:hover {
+        filter: brightness(0.8);
+    }
+}
 
 @media (orientation: landscape) {
-    .card-stack {
+    .card-deck {
         --scale: 11vh;
     }
 }
 
 @media (orientation: portrait) {
-    .card-stack {
+    .card-deck {
         --scale: 11vw;
     }
 }
 
-@media (orientation: landscape) and (max-width: 1200px) {
-    .card-stack {
-        margin-top: -30%;
-        --scale: 12vh;
-    }
-}
 
-@media (orientation: portrait) and (max-width: 1200px) {
-    .card-stack {
-        margin-top: -30%;
-        --scale: 12vw;
-    }
-}
-
-@media (orientation: landscape) and (max-width: 720px),
-(max-height:600px) {
-    .card-stack {
-        --scale: 14vh;
-    }
-}
-
-@media (orientation: portrait) and (max-width: 720px) {
-    .card-stack {
-        --scale: 14vw;
-        margin-left: -20%;
-    }
-}
-
-@media(max-height:540px) {
-    .card-stack {
-        margin-top: -15%;
-    }
-}
-
-@media(max-height:440px) {
-    .card-stack {
-        margin-top: -10%;
-    }
-}
-
-@media(max-height:319px) {
-    .card-stack {
-        margin-top: -5%;
-    }
-}
-
-@media(max-width: 479px),
-(max-height:370px) {
-    .btn-add {
-        position: absolute;
-        top: 1rem;
-        left: 1rem;
-        right: 0;
-    }
-}
+/* Media queries to ensure that the circle always fits the screen */
 
 .hidden {
     visibility: hidden;
