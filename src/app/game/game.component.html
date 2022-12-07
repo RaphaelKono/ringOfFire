@@ -3,9 +3,13 @@
         <img src="assets/img/bg.jpg">
     </div>
 
-    <!-- <div class="players-container">
-    <app-player *ngFor="let player of game.players; let i = index" [ngStyle]="{'top.rem': 1 + (2.2*i)}" [name]="player" [playerActive]="i === game.currentPlayer" class="player-container-pos"></app-player>
-</div> -->
+    <div class="players-container hide-small-screen">
+        <app-player *ngFor="let player of game.players; let i = index" [ngStyle]="{'top.rem': 1 + (2.2*i)}" [name]="player" [playerActive]="i === game.currentPlayer" class="player-container-pos"></app-player>
+    </div>
+
+    <div class="players-container hide-big-screen" #scrollX>
+        <app-player *ngFor="let player of game.players; let i = index" [name]="player" [playerActive]="i === game.currentPlayer" class=""></app-player>
+    </div>
 
     <div class="container">
         <div class="card-deck">
@@ -13,8 +17,8 @@
                 <li [class.hidden]="c == ''" *ngFor="let c of game.stack; let i = index;" (click)="pickCard(i)" [ngStyle]="{'transform': 'rotate('+i*(360/game.stack.length)+'deg)', '-webkit-transform': 'rotate('+i*(360/game.stack.length)+'deg)', '-ms-transform': 'rotate('+i*(360/game.stack.length)+'deg)'}">
                     <img class="card-img" src="assets/img/cards/card_cover.png">
                 </li>
-                <img *ngFor="let card of game.playedCards;" (click)="openDetailsDialog()" class="card-img played-card" src="assets/img/cards/{{ card }}.png">
-                <img *ngIf="game.pickCardAnimation" class="card-img pick-card" src="assets/img/cards/{{ game.currentCard }}.png">
+                <img *ngFor="let card of game.playedCards; let j = index" (click)="openDetailsDialog()" [ngStyle]="{'right.px':j}" class="card-img played-card" src="assets/img/cards/{{ card }}.png">
+                <img *ngIf="game.pickCardAnimation" [ngStyle]="{'right.px':game.playedCards.length}" class="card-img pick-card" src="assets/img/cards/{{ game.currentCard }}.png">
             </ul>
         </div>
     </div>

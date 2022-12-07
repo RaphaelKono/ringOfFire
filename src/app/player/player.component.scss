@@ -16,38 +16,36 @@
         font-size: 1.5rem;
         color: white;
     }
-}
-
-.shortname {
-    display: none;
+    &:hover {
+        filter: saturate(1.5);
+    }
 }
 
 .player-active {
     background-color: rgba(161, 21, 77, 0.5);
 }
 
-@media (orientation: landscape) and (max-width: 1400px) {
+@media (max-width: 1700px) {
     .player-container {
         width: 12rem;
     }
 }
 
-@media (orientation: portrait) and (max-width: 1400px) {
-    .player-container {
-        width: 12rem;
-    }
-}
-
-@media(max-width:1200px) {
+@media(max-width:1199px) {
     .player-container {
         gap: .5rem;
         width: unset;
         padding: 0 .5rem 0 0;
-    }
-    .shortname {
-        display: unset;
-    }
-    .fullname {
-        display: none;
+        display: flex;
+        flex-direction: column-reverse;
+        width: 150px;
+        border-top-left-radius: unset;
+        border-bottom-left-radius: 2rem;
+        border-bottom-right-radius: 2rem;
+        img {
+            height: 3rem;
+            width: 3rem;
+            display: block;
+        }
     }
 }

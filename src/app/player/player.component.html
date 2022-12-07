@@ -1,6 +1,4 @@
-<div (mouseenter)="isHovered = true;" (mouseleave)="isHovered = false;" class="player-container d-flex align-items-center short-longname" [class.player-active]="playerActive">
+<div class="player-container d-flex align-items-center short-longname" [class.player-active]="playerActive">
     <img src="assets/img/avatar.png">
     <span class="fullname">{{name}}</span>
-    <span *ngIf="!isHovered" class="shortname">{{name.charAt(0)}}</span>
-    <span *ngIf="isHovered" class="shortname">{{name}}</span>
 </div>

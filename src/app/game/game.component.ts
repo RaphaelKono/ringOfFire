@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
@@ -14,17 +14,26 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./game.component.scss']
 })
 
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, AfterViewInit {
   game: Game;
   gameID: string = '';
+  @ViewChild('scrollX') scrollX: ElementRef;
+
 
   constructor(private route: ActivatedRoute, public dialog: MatDialog, public gameInfoHelper: GameInfoHelperService, private firestore: Firestore) {
+  }
+
+  ngAfterViewInit(): void {
+    // this.scrollX.addEventListener("wheel", (evt) => {
+    //   evt.preventDefault();
+    //   this.scrollX.scrollLeft += evt.deltaY;
+    // });
+    @HostListener('wheel',['$event']) handleScroll(event: ScrollBehavior)
   }
 
   ngOnInit(): void {
     this.newGame();
     this.route.params.subscribe((param: any) => this.subscribeCurrentRoute(param));
-    this.saveGame();
   }
 
   subscribeCurrentRoute(param: any) {
@@ -59,7 +68,7 @@ export class GameComponent implements OnInit {
   }
 
   pickCard(index: number) {
-    if (!this.game.pickCardAnimation && this.game.players.length >0)
+    if (!this.game.pickCardAnimation && this.game.players.length > 0)
       this.update(index);
   }
 
