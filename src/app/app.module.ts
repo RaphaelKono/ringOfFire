@@ -25,6 +25,14 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { DialogJoinGameComponent } from './dialog-join-game/dialog-join-game.component';
+import { DialogEditPlayerComponent } from './dialog-edit-player/dialog-edit-player.component';
+import { ImprintComponent } from './imprint/imprint.component';
+import { DataPrivacyComponent } from './data-privacy/data-privacy.component';
+import { HeaderComponent } from './header/header.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { FooterComponent } from './footer/footer.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 @NgModule({
@@ -36,7 +44,12 @@ import { DialogJoinGameComponent } from './dialog-join-game/dialog-join-game.com
     DialogAddPlayerComponent,
     GameInfoComponent,
     DialogDetailedInfoComponent,
-    DialogJoinGameComponent
+    DialogJoinGameComponent,
+    DialogEditPlayerComponent,
+    ImprintComponent,
+    DataPrivacyComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +64,9 @@ import { DialogJoinGameComponent } from './dialog-join-game/dialog-join-game.com
     MatCardModule,
     MatProgressBarModule,
     MatDividerModule,
+    MatToolbarModule,
+    MatExpansionModule,
+    MatMenuModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),

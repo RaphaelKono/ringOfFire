@@ -1,0 +1,16 @@
+.imprint-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.imprint-content {
+    flex-grow: 1;
+    margin-top: 1rem;
+}
+
+app-header,
+app-footer {
+    background-color: #424242 !important;
+    min-height: 2.5rem;
+}

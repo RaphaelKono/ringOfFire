@@ -4,17 +4,17 @@
     </div>
 
     <div class="players-container hide-small-screen">
-        <app-player *ngFor="let player of game.players; let i = index" [ngStyle]="{'top.rem': 1 + (2.2*i)}" [name]="player" [playerActive]="i === game.currentPlayer" class="player-container-pos"></app-player>
+        <app-player (click)="openEditPlayerDialog(i)" *ngFor="let player of game.players; let i = index" [ngStyle]="{'top.rem': 1 + (2.2*i)}" [name]="player" [imgSrc]="game.playerImgs[i]" [playerActive]="i === game.currentPlayer" class="player-container-pos"></app-player>
     </div>
 
     <div class="players-container hide-big-screen" #scrollX>
-        <app-player *ngFor="let player of game.players; let i = index" [name]="player" [playerActive]="i === game.currentPlayer" class=""></app-player>
+        <app-player (click)="openEditPlayerDialog(i)" (wheel)="onWheel($event)" *ngFor="let player of game.players; let i = index;" [name]="player" [imgSrc]="game.playerImgs[i]" [playerActive]="i === game.currentPlayer" class=""></app-player>
     </div>
 
     <div class="container">
         <div class="card-deck">
             <ul class="card-spread">
-                <li [class.hidden]="c == ''" *ngFor="let c of game.stack; let i = index;" (click)="pickCard(i)" [ngStyle]="{'transform': 'rotate('+i*(360/game.stack.length)+'deg)', '-webkit-transform': 'rotate('+i*(360/game.stack.length)+'deg)', '-ms-transform': 'rotate('+i*(360/game.stack.length)+'deg)'}">
+                <li [class.hidden]="c == ''" *ngFor="let c of game.stack; let i = index;" (click)="pickCard(i)" [ngStyle]="getCardStyle(i)">
                     <img class="card-img" src="assets/img/cards/card_cover.png">
                 </li>
                 <img *ngFor="let card of game.playedCards; let j = index" (click)="openDetailsDialog()" [ngStyle]="{'right.px':j}" class="card-img played-card" src="assets/img/cards/{{ card }}.png">
@@ -44,7 +44,7 @@
                 </mat-card-header>
                 <mat-divider></mat-divider>
                 <mat-card-content>
-                    <button mat-button color="primary" (click)="ngOnInit()" class="start-btn fadeIn">Restart Game</button>
+                    <button mat-button color="primary" (click)="restartGame()" class="start-btn fadeIn">Restart Game</button>
                 </mat-card-content>
             </mat-card>
         </div>
@@ -55,3 +55,13 @@
 
 
 <!-- <a href="https://www.flaticon.com/free-icons/beard" title="beard icons">Beard icons created by Freepik - Flaticon</a> -->
+<!-- <a href="https://www.flaticon.com/free-icons/person" title="person icons">Person icons created by Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/sloth" title="sloth icons">Sloth icons created by Freepik - Flaticon</a>
+
+<a href="https://www.flaticon.com/free-icons/person" title="person icons">Person icons created by Freepik - Flaticon</a>
+
+
+
+
+<a href="https://www.flaticon.com/free-icons/animal-kingdom" title="animal kingdom icons">Animal kingdom icons created by Prashanth Rapolu 15 - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/sloth" title="sloth icons">Sloth icons created by Freepik - Flaticon</a> -->

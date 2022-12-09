@@ -8,6 +8,11 @@
     margin-bottom: 1rem !important;
 }
 
+.long-text-info {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 .small-example-card {
     display: none;
     border-top-left-radius: 0;

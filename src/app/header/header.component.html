@@ -1,0 +1,12 @@
+<mat-toolbar>
+    <mat-toolbar-row>
+        <span>My App</span>
+        <span class="example-spacer"></span>
+        <button mat-icon-button [matMenuTriggerFor]="beforeMenu"><img class="menu-icon" src="assets/img/menu.png"></button>
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+            <button mat-menu-item (click)="navigate('')">Game</button>
+            <button mat-menu-item (click)="navigate('imprint')">Imprint</button>
+            <button mat-menu-item (click)="navigate('privacy')">Privacy</button>
+        </mat-menu>
+    </mat-toolbar-row>
+</mat-toolbar>

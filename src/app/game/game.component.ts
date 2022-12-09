@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
@@ -7,6 +7,7 @@ import { GameInfoHelperService } from 'src/services/game-info-helper.service';
 import { Firestore, collectionData, collection, doc, setDoc, docData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { DialogEditPlayerComponent } from '../dialog-edit-player/dialog-edit-player.component';
 
 @Component({
   selector: 'app-game',
@@ -14,22 +15,14 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./game.component.scss']
 })
 
-export class GameComponent implements OnInit, AfterViewInit {
+export class GameComponent implements OnInit {
   game: Game;
   gameID: string = '';
   @ViewChild('scrollX') scrollX: ElementRef;
+  cardStyle: any = {};
 
 
-  constructor(private route: ActivatedRoute, public dialog: MatDialog, public gameInfoHelper: GameInfoHelperService, private firestore: Firestore) {
-  }
-
-  ngAfterViewInit(): void {
-    // this.scrollX.addEventListener("wheel", (evt) => {
-    //   evt.preventDefault();
-    //   this.scrollX.scrollLeft += evt.deltaY;
-    // });
-    @HostListener('wheel',['$event']) handleScroll(event: ScrollBehavior)
-  }
+  constructor(private route: ActivatedRoute, public dialog: MatDialog, public gameInfoHelper: GameInfoHelperService, private firestore: Firestore) { }
 
   ngOnInit(): void {
     this.newGame();
@@ -44,6 +37,10 @@ export class GameComponent implements OnInit, AfterViewInit {
     game$.subscribe((game) => this.subscribeCurrentGameParameters(game));
   }
 
+  getCardStyle(i) {
+    return this.cardStyle = { 'transform': 'rotate(' + i * (360 / this.game.stack.length) + 'deg)', '-webkit-transform': 'rotate(' + i * (360 / this.game.stack.length) + 'deg)', '-ms-transform': 'rotate(' + i * (360 / this.game.stack.length) + 'deg)' }
+  }
+
   newGame() {
     this.game = new Game();
     this.game.playedKings = 0;
@@ -52,7 +49,7 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   openAddPlayerDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
-    dialogRef.afterClosed().subscribe((name: string) => this.validateNewPlayer(name));
+    dialogRef.afterClosed().subscribe((result: any) => this.validateNewPlayer(result));
   }
 
   openDetailsDialog(): void {
@@ -60,11 +57,41 @@ export class GameComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe();
   }
 
-  validateNewPlayer(name: string) {
-    if (name && name.length > 0) {
-      this.game.players.push(name);
+  openEditPlayerDialog(i: number): void {
+    const dialogRef = this.dialog.open(DialogEditPlayerComponent, {
+      data: { index: i, game: this.game }
+    });
+    dialogRef.afterClosed().subscribe(result => this.validateEditedPlayer(i, result));
+  }
+
+  validateNewPlayer(result: any) {
+    if (result.newName && result.newName.length > 0)
+      this.addPlayer(result);
+  }
+
+  addPlayer(result: any){
+    this.game.players.push(result.newName);
+      this.game.playerImgs.push(result.newImgSrc);
       this.saveGame();
-    }
+  }
+
+  validateEditedPlayer(i: number, result: any) {
+    if (result === 'delete')
+      this.removePlayer(i);
+    else if (result && result.newName && result.newName.length > 0)
+      this.editplayer(i, result)
+  }
+
+  removePlayer(i: number){
+    this.game.players.splice(i, 1);
+    this.game.playerImgs.splice(i, 1);
+    this.saveGame();
+  }
+
+  editplayer(i: number, result: any){
+    this.game.players.splice(i, 1, result.newName);
+    this.game.playerImgs.splice(i, 1, result.newImgSrc);
+    this.saveGame();
   }
 
   pickCard(index: number) {
@@ -94,11 +121,9 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   setPickedCard() {
     this.game.playedCards.push(this.game.currentCard);
-    this.saveGame();
     if (this.game.currentCard.includes('13'))
       this.game.playedKings++;
     this.game.pickCardAnimation = false;
-    this.saveGame();
     if (this.game.playedKings === 4)
       this.game.gameEnd = true;
     this.saveGame();
@@ -111,7 +136,7 @@ export class GameComponent implements OnInit, AfterViewInit {
   }
 
   gameIsFull() {
-    return this.game.players.length > 7;
+    return this.game.players.length > 12;
   }
 
   subscribeCurrentGameParameters(game: any) {
@@ -123,10 +148,20 @@ export class GameComponent implements OnInit, AfterViewInit {
     this.game.currentCard = game.currentCard;
     this.game.playedKings = game.playedKings;
     this.game.gameEnd = game.gameEnd;
+    this.game.playerImgs = game.playerImgs;
   }
 
   async saveGame() {
     let coll = collection(this.firestore, 'games');
     await setDoc(doc(coll, this.gameID), this.game.toJson());
+  }
+
+  onWheel(e: any) {
+    this.scrollX.nativeElement.scrollLeft += e.deltaY;
+  }
+
+  restartGame() {
+    this.newGame();
+    this.saveGame();
   }
 }

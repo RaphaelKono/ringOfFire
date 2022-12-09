@@ -48,4 +48,19 @@
             display: block;
         }
     }
+    .fullname {
+        padding-top: .5rem;
+    }
+}
+
+@media(max-height: 599px) {
+    .player-container {
+        img {
+            height: 2rem;
+            width: 2rem;
+        }
+        span {
+            font-size: 1rem;
+        }
+    }
 }

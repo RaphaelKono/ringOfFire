@@ -72,6 +72,24 @@ mat-card-subtitle {
     animation: fadeInAnimation 1s ease-in-out;
 }
 
+footer {
+    position: absolute;
+    width: 100vw;
+    bottom: .5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    a {
+        color: white;
+        font-family: 'Rye';
+        text-decoration: none;
+        cursor: pointer;
+        &:hover {
+            filter: brightness(0.8);
+        }
+    }
+}
+
 @keyframes fadeInAnimation {
     from {
         opacity: 0;
@@ -80,5 +98,14 @@ mat-card-subtitle {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@media(max-height: 500px) {
+    footer {
+        bottom: .2rem;
+    }
+    .mat-divider {
+        display: none;
     }
 }

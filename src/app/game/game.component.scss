@@ -34,6 +34,13 @@
     }
 }
 
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .pick-card {
     position: absolute;
     top: 0;
@@ -171,6 +178,12 @@ app-game-info {
 @media(min-width: 1200px) {
     .hide-big-screen {
         display: none;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 599px) {
+    .card-spread {
+        margin-top: 2rem;
     }
 }
 

@@ -30,4 +30,8 @@ export class StartScreenComponent {
     if (result)
       this.router.navigateByUrl('game/' + result);
   }
+
+  navigate(link: string){
+    this.router.navigateByUrl(link);
+  }
 }

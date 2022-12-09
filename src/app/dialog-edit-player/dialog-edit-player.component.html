@@ -1,16 +1,17 @@
-<h1 mat-dialog-title>Add New Player</h1>
+<h1 mat-dialog-title>Edit Player</h1>
 <div mat-dialog-content>
-    <p>Please enter your name</p>
+    <p>Change your name</p>
     <mat-form-field appearance="fill">
         <mat-label>Name</mat-label>
-        <input required maxlength="9" matInput [(ngModel)]="name">
+        <input required maxlength="9" matInput [(ngModel)]="name" value="name">
     </mat-form-field>
     <p>Please choose an avatar</p>
-    <div class="d-flex avatars" (wheel)="onWheel($event)" #avatars>
+    <div class="d-flex avatars" (wheel)="onWheel($event)" #avatarsEdit>
         <img (click)="setImage(img)" [ngStyle]="{'background-color': (img===imgSrc) ? '#73c7af' : 'unset'}" *ngFor="let img of imgSrcs; let i = index;" class="pick-avatar" src="assets/img/{{img}}">
     </div>
+    <button mat-button color="warn" (click)="deletePlayer()">Delete Player</button>
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-button [disabled]="(!name || patternIsDirty(name)) || imgSrc === ''" [mat-dialog-close]="{ newName: name, newImgSrc: imgSrc}" cdkFocusInitial>Ok</button>
+    <button mat-button [disabled]="name.length < 1 || patternIsDirty(name)" [mat-dialog-close]="{newName: name, newImgSrc: imgSrc}" cdkFocusInitial>Ok</button>
 </div>

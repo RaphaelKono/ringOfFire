@@ -1,0 +1,7 @@
+a {
+    text-decoration: none;
+    color: white;
+    &:hover {
+        filter: brightness(0.8);
+    }
+}
