@@ -1,14 +1,16 @@
 {
+  "projects": {
+    "default": "ring-of-fire-a4bee",
+    "ring-of-fire-a4bee": "ring-of-fire-a4bee"
+  },
   "targets": {
-    "ringoffire-5d1ce": {
+    "ring-of-fire-a4bee": {
       "hosting": {
         "ringOfFire": [
-          "ringoffire-5d1ce"
+          "ring-of-fire-a4bee"
         ]
       }
     }
   },
-  "projects": {
-    "default": "ringoffire-5d1ce"
-  }
+  "etags": {}
 }

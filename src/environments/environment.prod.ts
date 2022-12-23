@@ -1,11 +1,11 @@
 export const environment = {
-    firebase: {
-      projectId: 'ringoffire-5d1ce',
-      appId: '1:868057952977:web:f50f1d1ddcb10cee9e0bf0',
-      storageBucket: 'ringoffire-5d1ce.appspot.com',
-      apiKey: 'AIzaSyDdmxgY4zMliqgMGyz881Pks8q58lE3f-8',
-      authDomain: 'ringoffire-5d1ce.firebaseapp.com',
-      messagingSenderId: '868057952977',
-    },
-      production: true
-    };
+  firebase: {
+    apiKey: "AIzaSyAwYvUgQ8f0gAC_YGHVsuubddrlUGcPPNs",
+    authDomain: "ring-of-fire-a4bee.firebaseapp.com",
+    projectId: "ring-of-fire-a4bee",
+    storageBucket: "ring-of-fire-a4bee.appspot.com",
+    messagingSenderId: "1017868832776",
+    appId: "1:1017868832776:web:128c686066154266e581bd"
+  },
+  production: true
+};
